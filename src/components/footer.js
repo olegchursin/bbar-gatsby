@@ -1,7 +1,5 @@
 import React from 'react'
 
-import BBarMapImg from './img/bbarMap'
-
 const styles = {
   innerContainer: {
     display: 'flex',
@@ -41,9 +39,7 @@ const Footer = () => {
             </a>
           </p>
         </div>
-        <div>
-          <BBarMapImg />
-        </div>
+        <div />
         <div />
       </div>
     </div>
