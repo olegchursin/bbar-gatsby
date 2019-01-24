@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import Drawer from '@material-ui/core/Drawer'
 
-const StyledContainer = styled.div`
+const Navbar = styled.div`
   position: fixed;
   display: flex;
   justify-content: space-between;
@@ -18,15 +18,22 @@ const StyledContainer = styled.div`
   margin: 0 auto;
   padding: 0 3rem;
   background: #1f3238;
+  color: #fff;
 
   @media (max-width: 700px) {
     background: #1f3238;
     box-shadow: 0 1px 2px #1f3238;
   }
 `
-const StyledLink = styled(Link)`
+const Logo = styled(Link)`
   color: white;
   text-decoration: none;
+`
+
+const SlidingMenu = styled.div`
+  height: 100vh;
+  color: #fff;
+  background: #1f3238;
 `
 
 const styles = {
@@ -39,7 +46,7 @@ const styles = {
   },
 }
 
-const sideMenu = <div>Side menu</div>
+const menuContents = <SlidingMenu>Side menu</SlidingMenu>
 
 const Header = ({ siteTitle, classes }) => {
   const [open, toggleOpen] = useState(false)
@@ -52,29 +59,36 @@ const Header = ({ siteTitle, classes }) => {
     toggleOpen(false)
   }
 
-  return (
-    <StyledContainer>
-      <StyledLink to="/">{siteTitle}</StyledLink>
-      <StyledLink to="/page-2/">{siteTitle}</StyledLink>
-      <IconButton
-        color="inherit"
-        aria-label="Open drawer"
-        onClick={handleMenuOpen}
-        className={classNames(classes.menuButton, open && classes.hide)}
+  const menuIcon = (
+    <IconButton
+      color="inherit"
+      aria-label="Open menu"
+      onClick={handleMenuOpen}
+      className={classNames(classes.menuButton, open && classes.hide)}
+    >
+      <MenuIcon />
+    </IconButton>
+  )
+
+  const slidingMenu = (
+    <Drawer anchor="top" open={open} onClose={handleMenuClose}>
+      <div
+        tabIndex={0}
+        role="button"
+        onClick={handleMenuClose}
+        onKeyDown={handleMenuClose}
       >
-        <MenuIcon />
-      </IconButton>
-      <Drawer anchor="right" open={open} onClose={handleMenuClose}>
-        <div
-          tabIndex={0}
-          role="button"
-          onClick={handleMenuClose}
-          onKeyDown={handleMenuClose}
-        >
-          {sideMenu}
-        </div>
-      </Drawer>
-    </StyledContainer>
+        {menuContents}
+      </div>
+    </Drawer>
+  )
+
+  return (
+    <Navbar>
+      <Logo to="/">{siteTitle}</Logo>
+      {menuIcon}
+      {slidingMenu}
+    </Navbar>
   )
 }
 
