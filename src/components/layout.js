@@ -12,7 +12,7 @@ const styles = {
     flexDirection: 'column',
   },
   content: {
-    maxWidth: '1280px',
+    maxWidth: '1800px',
     paddingTop: 80,
     flexGrow: 1,
   },
