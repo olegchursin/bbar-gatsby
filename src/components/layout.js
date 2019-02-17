@@ -7,16 +7,14 @@ import './layout.css'
 
 const styles = {
   wrapper: {
-    height: '100%',
+    display: 'flex',
+    minHeight: '100vh',
+    flexDirection: 'column',
   },
-  body: {
-    minHeight: '100%',
-    display: 'grid',
-    gridTemplateRows: '1fr auto',
-  },
-  footer: {
-    gridRowStart: 2,
-    gridRowEnd: 3,
+  content: {
+    maxWidth: '1280px',
+    paddingTop: 80,
+    flexGrow: 1,
   },
 }
 
@@ -33,17 +31,9 @@ const Layout = ({ children }) => (
     `}
     render={data => (
       <>
-        <div className={'site'}>
+        <div style={styles.wrapper}>
           <Header siteTitle={data.site.siteMetadata.title} />
-          <div
-            className={'site-content'}
-            style={{
-              maxWidth: '1280px',
-              paddingTop: 80,
-            }}
-          >
-            {children}
-          </div>
+          <div style={styles.content}>{children}</div>
           <Footer />
         </div>
       </>
