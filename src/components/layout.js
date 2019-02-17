@@ -1,10 +1,24 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 
 import Header from './header'
 import Footer from './footer'
 import './layout.css'
+
+const styles = {
+  wrapper: {
+    height: '100%',
+  },
+  body: {
+    minHeight: '100%',
+    display: 'grid',
+    gridTemplateRows: '1fr auto',
+  },
+  footer: {
+    gridRowStart: 2,
+    gridRowEnd: 3,
+  },
+}
 
 const Layout = ({ children }) => (
   <StaticQuery
@@ -19,23 +33,22 @@ const Layout = ({ children }) => (
     `}
     render={data => (
       <>
-        <Header siteTitle={data.site.siteMetadata.title} />
-        <div
-          style={{
-            maxWidth: '1280px',
-            paddingTop: 80,
-          }}
-        >
-          {children}
+        <div className={'site'}>
+          <Header siteTitle={data.site.siteMetadata.title} />
+          <div
+            className={'site-content'}
+            style={{
+              maxWidth: '1280px',
+              paddingTop: 80,
+            }}
+          >
+            {children}
+          </div>
+          <Footer />
         </div>
-        <Footer />
       </>
     )}
   />
 )
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-}
 
 export default Layout

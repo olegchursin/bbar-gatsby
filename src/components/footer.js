@@ -18,7 +18,7 @@ const styles = {
 
 const Footer = () => {
   return (
-    <div style={styles.footerWrapper}>
+    <footer style={styles.footerWrapper}>
       <div style={styles.innerContainer}>
         <div>
           <h1>Address</h1>
@@ -42,7 +42,7 @@ const Footer = () => {
         <div />
         <div />
       </div>
-    </div>
+    </footer>
   )
 }
 

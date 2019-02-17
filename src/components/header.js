@@ -49,7 +49,7 @@ const styles = {
 const menuContents = <SlidingMenu>Side menu</SlidingMenu>
 
 const Header = ({ siteTitle, classes }) => {
-  const [open, toggleOpen] = useState(false)
+  const [isOpen, toggleOpen] = useState(false)
 
   const handleMenuOpen = () => {
     toggleOpen(true)
@@ -64,14 +64,14 @@ const Header = ({ siteTitle, classes }) => {
       color="inherit"
       aria-label="Open menu"
       onClick={handleMenuOpen}
-      className={classNames(classes.menuButton, open && classes.hide)}
+      className={classNames(classes.menuButton, isOpen && classes.hide)}
     >
       <MenuIcon />
     </IconButton>
   )
 
   const slidingMenu = (
-    <Drawer anchor="top" open={open} onClose={handleMenuClose}>
+    <Drawer anchor="top" open={isOpen} onClose={handleMenuClose}>
       <div
         tabIndex={0}
         role="button"
