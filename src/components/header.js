@@ -6,9 +6,10 @@ import classNames from 'classnames'
 import { withStyles } from '@material-ui/core/styles'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
+import CloseIcon from '@material-ui/icons/Close'
 import Drawer from '@material-ui/core/Drawer'
 
-const Navbar = styled.div`
+const Navbar = styled.nav`
   position: fixed;
   display: flex;
   justify-content: space-between;
@@ -19,6 +20,7 @@ const Navbar = styled.div`
   padding: 0 3rem;
   background: #1f3238;
   color: #fff;
+  z-index: 100;
 
   @media (max-width: 700px) {
     background: #1f3238;
@@ -30,23 +32,30 @@ const Logo = styled(Link)`
   text-decoration: none;
 `
 
-const SlidingMenu = styled.div`
+const SlidingMenu = styled.section`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 100vh;
   color: #fff;
   background: #1f3238;
 `
 
 const styles = {
-  menuButton: {
+  openMenu: {
     marginLeft: 12,
     marginRight: 20,
+  },
+  closeMenu: {
+    position: 'absolute',
+    height: '48px',
+    top: '40px',
+    right: '40px',
   },
   hide: {
     display: 'none',
   },
 }
-
-const menuContents = <SlidingMenu>Side menu</SlidingMenu>
 
 const Header = ({ siteTitle, classes }) => {
   const [isOpen, toggleOpen] = useState(false)
@@ -64,10 +73,28 @@ const Header = ({ siteTitle, classes }) => {
       color="inherit"
       aria-label="Open menu"
       onClick={handleMenuOpen}
-      className={classNames(classes.menuButton, isOpen && classes.hide)}
+      className={classNames(classes.openMenu, isOpen && classes.hide)}
     >
       <MenuIcon />
     </IconButton>
+  )
+
+  const closeIcon = (
+    <IconButton
+      color="inherit"
+      aria-label="Close menu"
+      onClick={handleMenuClose}
+      className={classNames(classes.closeMenu, !isOpen && classes.hide)}
+    >
+      <CloseIcon />
+    </IconButton>
+  )
+
+  const menuContents = (
+    <SlidingMenu>
+      <div>Title</div>
+      {closeIcon}
+    </SlidingMenu>
   )
 
   const slidingMenu = (

@@ -2,6 +2,7 @@ import React from 'react'
 import { graphql, StaticQuery } from 'gatsby'
 
 import BackgroundImage from 'gatsby-background-image'
+import ButtonLight from './widgets/ButtonLight'
 
 const styles = {
   intro: {
@@ -28,8 +29,12 @@ const IntroImage = ({ className }) => (
       }
     `}
     render={data => {
-      window.console.log('data', data)
       const imageData = data.desktop.childImageSharp.fluid
+
+      const handleClick = () => {
+        console.log('clicked button')
+      }
+
       return (
         <BackgroundImage
           Tag="section"
@@ -38,7 +43,7 @@ const IntroImage = ({ className }) => (
           backgroundColor={`#040e18`}
         >
           <div style={styles.intro}>
-            <h1>Hello gatsby-background-image</h1>
+            <ButtonLight handleClick={handleClick} />
           </div>
         </BackgroundImage>
       )
